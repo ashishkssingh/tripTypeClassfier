@@ -1,1 +1,1 @@
-# tripTypeClassfier
+# Trip Type Classifier
