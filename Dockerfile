@@ -13,8 +13,16 @@ ADD . /app
 # Upgrade pip to the latest version
 RUN pip install --upgrade pip
 
+# install dependencies
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev
+RUN pip install cython
+RUN apk del .build-deps gcc musl-dev
+
 # Install any needed packages specified in requirements.txt
-RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
+RUN pip install pandas
+RUN pip install sklearn
+RUN pip install flask
+RUN pip install matplotlib
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
