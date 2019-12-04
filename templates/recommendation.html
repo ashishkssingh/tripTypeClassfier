@@ -1,0 +1,355 @@
+<html>
+
+<head>
+  <title>
+    Customer Shopping Analysis
+  </title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .navigation {
+      height: 70px;
+      background: #1c1a1c;
+    }
+
+    .brand {
+      position: absolute;
+      padding-left: 20px;
+      float: left;
+      line-height: 70px;
+      text-transform: uppercase;
+      font-size: 1.4em;
+    }
+
+    .brand a,
+    .brand a:visited {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .nav-container {
+      margin: 0 auto;
+    }
+
+    nav {
+      float: right;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      float: left;
+      position: relative;
+    }
+
+    nav ul li a,
+    nav ul li a:visited {
+      display: block;
+      padding: 0 20px;
+      line-height: 70px;
+      background: #262626;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:visited:hover {
+      background: #2581DC;
+      color: #ffffff;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    .box1 {
+      float: left;
+      width: 40%;
+      position: relative;
+      padding:1%;
+    }
+
+    .box2 {
+      float: left;
+      width: 12%;
+      text-align: center;
+      position: relative;
+      margin-top: 10%;
+    }
+
+    .box3 {
+      float: left;
+      width: 40%;
+      position: relative;
+      padding:1%;
+    }
+
+    .buttongroup {
+      margin: 0;
+      position: absolute;
+      top: 40%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+
+    button {
+      background: none;
+      border: 0;
+      box-sizing: border-box;
+      margin: 1em;
+      padding: 1em 2em;
+      box-shadow: inset 0 0 0 2px #aaa;
+      color: #aaa;
+      font-size: inherit;
+      font-weight: 700;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    button::before,
+    button::after {
+      box-sizing: inherit;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .check,.reset {
+      transition: color 0.25s;
+    }
+
+    .check::before,
+    .check::after,
+    .reset::before,
+    .reset::after {
+      border: 2px solid transparent;
+      width: 0;
+      height: 0;
+    }
+
+    .check::before,.reset::before  {
+      top: 0;
+      left: 0;
+    }
+
+    .check::after,
+    .reset::after {
+      bottom: 0;
+      right: 0;
+    }
+
+    .check:hover {
+      color: #60daaa;
+    }
+
+    .reset:hover {
+      color: #f45e61;
+    }
+
+    .check:hover::before,
+    .check:hover::after,
+    .reset:hover::before,
+    .reset:hover::after  {
+      width: 100%;
+      height: 100%;
+    }
+
+    .check:hover::before {
+      border-top-color: #60daaa;
+      border-right-color: #60daaa;
+      transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+    }
+
+    .check:hover::after {
+      border-bottom-color: #60daaa;
+      border-left-color: #60daaa;
+      transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
+    }
+
+    .reset:hover::before {
+      border-top-color: #f45e61;
+      border-right-color: #f45e61;
+      transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+    }
+
+    .reset:hover::after {
+      border-bottom-color: #f45e61;
+      border-left-color: #f45e61;
+      transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
+    }
+
+  </style>
+</head>
+
+<body>
+  <section class="navigation">
+    <div class="nav-container">
+      <div class="brand">
+        <a href="#!">Shoppers Analysis</a>
+      </div>
+      <nav>
+        <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+        <ul class="nav-list">
+          <li>
+            <a href="/recommendation.html">Recommendation</a>
+          </li>
+          <li>
+            <a href="#!">Customer Classifier</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+  <div class="box1">
+    <h3>Select one or more items:</h3>
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Bag of Organic Bananas"> Bag of Organic Bananas
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Banana"> Banana
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Honeycrisp Apple"> Honeycrisp Apple
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Limes"> Limes
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Avocado"> Organic Avocado
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Baby Spinach"> Organic Baby Spinach
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Blueberries"> Organic Blueberries
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Cucumber"> Organic Cucumber
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Fuji Apple"> Organic Fuji Apple
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Hass Avocado"> Organic Hass Avocado
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Raspberries"> Organic Raspberries
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Organic Strawberries'"> Organic Strawberries
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        <input class="item" type="checkbox" name="fruit" value="Strawberries"> Strawberries
+      </li>
+    </ul>
+  </div>
+  <div class="box2">
+    <div class="buttongroup">
+      <button class="check" type="submit" value="Checkout">Recommend</button>
+      <button class="reset" type="submit" value="Reset">Reset</button>
+    </div>
+  </div>
+
+  <div class="box3">
+    <div class="recommend" style="display: none;">
+      <h3>Recommended Products</h3>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+
+    $(".reset").click(function () {
+      $(".item").prop('checked', false);
+      $(".recommend").remove(".product")
+      $(".recommend").css("display", "none")
+    });
+
+    $(".check").on("click", function () {
+
+      if($("input[name='fruit']:checked").length == 0){
+        alert("Please select an item to recommend.")
+        return false
+      }
+
+      if (!$(".product").length == 0) {
+        $(".product").remove();
+      }
+
+      var pickedArray = [];
+      $.each($("input[name='fruit']:checked"), function () {
+        pickedArray.push($(this).val());
+      })
+
+      $.ajax({
+        type: "POST",
+        url: "result",
+        data: JSON.stringify({ "check": pickedArray }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (recommendedProducts) {
+          console.log(recommendedProducts);
+
+          recommendedProducts = recommendedProducts["products"];
+
+          // append recommendations
+          recommendedProducts.forEach(product => {
+            $(".recommend").append("<ul><li class='product'>"+product+"</li></ul>");
+          });
+
+          $(".recommend").css("display", "block");
+
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

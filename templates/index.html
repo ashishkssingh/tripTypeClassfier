@@ -1,0 +1,236 @@
+<html>
+
+<head>
+  <title>Customer Pattern Analysis</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0078d7;
+      font-family: sans-serif;
+    }
+
+    .navigation {
+      height: 70px;
+      background: #1c1a1c;
+    }
+
+    .brand {
+      position: absolute;
+      padding-left: 20px;
+      float: left;
+      line-height: 70px;
+      text-transform: uppercase;
+      font-size: 1.4em;
+    }
+
+    .brand a,
+    .brand a:visited {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .nav-container {
+      margin: 0 auto;
+    }
+
+    nav {
+      float: right;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      float: left;
+      position: relative;
+    }
+
+    nav ul li a,
+    nav ul li a:visited {
+      display: block;
+      padding: 0 20px;
+      line-height: 70px;
+      background: #262626;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:visited:hover {
+      background: #2581DC;
+      color: #ffffff;
+    }
+
+    .box {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    #box1 {
+      background: #fff;
+      border-radius: 2px;
+      display: inline-block;
+      height: 50%;
+      margin: 1rem;
+      position: relative;
+      width: 60%;
+    }
+
+    #box2 {
+      background: #fff;
+      border-radius: 2px;
+      display: inline-block;
+      height: 50%;
+      margin: 1rem;
+      position: relative;
+      width: 34%;
+    }
+
+    .bar {
+      fill: steelblue;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="navigation">
+    <div class="nav-container">
+      <div class="brand">
+        <a href="#!">Shoppers Analysis</a>
+      </div>
+      <nav>
+        <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+        <ul class="nav-list">
+          <li>
+            <a href="/recommendation.html">Recommendation</a>
+          </li>
+          <li>
+            <a href="#!">Customer Classifier</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <div id="box1" class="box">
+
+    <canvas id="top10canvas"></canvas>
+
+  </div>
+
+  <div id="box2" class="box">
+    <canvas id="top10Doughnut"></canvas>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+  <script>
+
+    var product = ['{{product}}'][0].split("*");
+    var count = ['{{count}}'][0].split('*').map(Number);
+
+    var color = ['#00a6ff', '#0c9aff', '#198eff', '#2682ff', '#3376ff', '#3f6aff', '#4c5eff', '#5953ff', '#6647ff', '#733bff']
+
+    var total = count.reduce((a, b) => a + b, 0)
+
+    var pieData = count.map(function (val) {
+      return parseFloat(((val / total) * 100).toFixed(2))
+    })
+
+    console.log(pieData)
+
+    // Top 10 Items Bar plot data
+    var barChartData = {
+      labels: product,
+      datasets: [{
+        label: 'Top 10 Items Sold',
+        backgroundColor: color,
+        borderWidth: 1,
+        data: count
+      }]
+    };
+
+    // Top 10 Items Doughnut Plot Data
+    var doughnutChartData = {
+      labels: product,
+      datasets: [{
+        backgroundColor: color,
+        borderWidth: 1,
+        data: pieData
+      }]
+
+    };
+
+    window.onload = function () {
+
+      var top10Bar = document.getElementById('top10canvas').getContext('2d');
+
+      window.myBar = new Chart(top10Bar, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+          layout: {
+            padding: {
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 20
+            }
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Top 10 Items Sold'
+          },
+          scales: {
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+
+      var top10Doughnut = document.getElementById('top10Doughnut').getContext('2d');
+
+      window.myBar = new Chart(top10Doughnut, {
+        type: 'doughnut',
+        data: doughnutChartData,
+        options: {
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				},
+          layout: {
+            padding: {
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 20
+            }
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Percent Share of top 10 Items Sold'
+          }
+        }
+      });
+
+    };
+
+  </script>
+</body>
+
+</html>
