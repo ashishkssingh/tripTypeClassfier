@@ -1,5 +1,7 @@
 import json
 import pandas as pd
+from pandas.io.json import json_normalize
+import pickle
 
 corpus = {}
 
@@ -18,6 +20,11 @@ def recommendProducts(pickedProductsArray):
         pickedProduct for pickedProduct in recommendedProductsArray if pickedProduct not in pickedProductsArray]
 
     return list(dict.fromkeys(recommendedProductsArray))
+
+def predict(predictingValue):
+  loaded_model = pickle.load(open("app_data/walmart_classifier.pkl", 'rb'))
+  print(json_normalize(predictingValue))
+  return 1
 
 def get_top_10_items():
   df = pd.read_csv("app_data/top10.csv")

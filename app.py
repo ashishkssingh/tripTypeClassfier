@@ -19,6 +19,12 @@ def renderRecommendationPage():
 def classifier():
   return render_template("classifier.html")
 
+@app.route('/predict',methods = ['POST', 'GET'])
+def predict():
+  inputValue = request.json['value']
+  triptype = processing.predict(inputValue)
+  return jsonify({'triptype':triptype})
+
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
    if request.method == 'POST':
