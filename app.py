@@ -1,5 +1,6 @@
 import processing
 import json
+from pandas.io.json import json_normalize
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -21,9 +22,11 @@ def classifier():
 
 @app.route('/predict',methods = ['POST', 'GET'])
 def predict():
-  inputValue = request.json['value']
+  inputValue = json_normalize(request.json['value'])
+  print(inputValue.values.tolist())
   triptype = processing.predict(inputValue)
-  return jsonify({'triptype':triptype})
+  print(triptype.tolist())
+  return json.dumps(triptype.tolist())
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
@@ -35,4 +38,4 @@ def result():
       return jsonify({'products':recommendedProducts})
     
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(host='0.0.0.0', port=80,debug=True)
