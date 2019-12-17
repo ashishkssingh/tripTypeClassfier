@@ -2,4 +2,4 @@ __pycache__/
 .vs/
 .vscode/
 venv/
-app_data/walmart_classifier.pkl
+app_data/
